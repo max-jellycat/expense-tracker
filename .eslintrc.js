@@ -4,7 +4,7 @@ module.exports = {
     es6: true,
     jest: true,
   },
-  extends: ['airbnb'],
+  extends: ['airbnb', 'prettier'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -18,12 +18,14 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    'implicit-arrow-linebreak': 0,
     'max-len': 0,
     'no-confusing-arrow': 0,
     'no-unused-expressions': 0,
-    'no-unused-vars': 1,
+    'no-unused-vars': 0,
     'object-curly-newline': 0,
     'jsx-a11y/label-has-associated-control': 0,
+    'react/forbid-prop-types': 0,
   },
   settings: {
     'import/resolver': {
