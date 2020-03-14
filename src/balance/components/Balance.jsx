@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import useBalance from 'balance/contexts/balance';
 import Heading from 'common/components/Heading';
 import Text from 'common/components/Text';
 import IncomeExpenses from 'balance/components/IncomeExpenses';
@@ -15,16 +16,20 @@ const CurrentBalance = styled(Text)`
   margin-top: ${(props) => props.theme.sizings.small};
 `;
 
-const Balance = () => (
-  <BalanceView>
-    <Heading size="default" isUppercase>
-      Your balance
-    </Heading>
-    <CurrentBalance size="larger" isBold>
-      200.00 €
-    </CurrentBalance>
-    <IncomeExpenses />
-  </BalanceView>
-);
+const Balance = () => {
+  const { balance } = useBalance();
+
+  return (
+    <BalanceView>
+      <Heading size="default" isUppercase>
+        Your balance
+      </Heading>
+      <CurrentBalance size="larger" isBold>
+        {`${balance} €`}
+      </CurrentBalance>
+      <IncomeExpenses />
+    </BalanceView>
+  );
+};
 
 export default Balance;

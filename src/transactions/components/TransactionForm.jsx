@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import useTransaction from 'transactions/contexts/transactions';
+import useBalance from 'balance/contexts/balance';
 
 import InputField from 'common/components/InputField';
 import RadioField from 'common/components/RadioField';
@@ -33,6 +34,7 @@ const Label = styled(Text)`
 
 const TransactionForm = () => {
   const { addTransaction } = useTransaction();
+  const { addIncome, addExpense } = useBalance();
   const [values, setValues] = useState({
     text: '',
     amount: '',
@@ -49,9 +51,20 @@ const TransactionForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTransaction(values);
+    const { text, amount, type } = values;
+    const parsedAmount = Math.round(parseFloat(amount) * 100) / 100;
+
+    addTransaction({
+      text,
+      amount: parsedAmount,
+      type,
+    });
+
+    type === 'income' ? addIncome(parsedAmount) : addExpense(parsedAmount);
+
     setValues({
       text: '',
+      type: '',
       amount: '',
     });
   };

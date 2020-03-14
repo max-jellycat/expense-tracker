@@ -5,6 +5,7 @@ import 'App.css';
 import Theme from 'common/components/Theme';
 
 import { TransactionsProvider } from 'transactions/contexts/transactions';
+import { BalanceProvider } from 'balance/contexts/balance';
 import Header from 'common/components/layout/Header';
 import Balance from 'balance/components/Balance';
 import TransactionsList from 'transactions/components/TransactionsList';
@@ -22,10 +23,12 @@ const App = () => (
   <Theme>
     <Wrapper>
       <TransactionsProvider>
-        <Header />
-        <Balance />
-        <TransactionsList />
-        <TransactionsForm />
+        <BalanceProvider>
+          <Header />
+          <Balance />
+          <TransactionsList />
+          <TransactionsForm />
+        </BalanceProvider>
       </TransactionsProvider>
     </Wrapper>
   </Theme>

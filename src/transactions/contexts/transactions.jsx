@@ -15,7 +15,7 @@ export const TransactionsProvider = ({ children }) => {
         {
           id: uuid(),
           text,
-          amount: parseFloat(amount),
+          amount,
           type,
         },
       ]);
