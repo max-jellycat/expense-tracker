@@ -1,7 +1,11 @@
-import React, { useState, useEffect, useContext, createContext } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useContext,
+  createContext,
+} from 'react';
 import PropTypes from 'prop-types';
-
-import useTransaction from 'transactions/contexts/transactions';
 
 const BalanceContext = createContext();
 
@@ -10,9 +14,9 @@ export const BalanceProvider = ({ children }) => {
   const [incomes, setIncomes] = useState(0);
   const [expenses, setExpenses] = useState(0);
 
-  const updateBalance = () => {
+  const updateBalance = useCallback(() => {
     setBalance(Math.round((incomes - expenses) * 100) / 100);
-  };
+  }, [incomes, expenses]);
 
   const addIncome = (value) => {
     setIncomes(Math.round((incomes + value) * 100) / 100);
@@ -22,7 +26,7 @@ export const BalanceProvider = ({ children }) => {
     setExpenses(Math.round((expenses + value) * 100) / 100);
   };
 
-  useEffect(() => updateBalance(), [incomes, expenses]);
+  useEffect(() => updateBalance(), [incomes, expenses, updateBalance]);
 
   return (
     <BalanceContext.Provider
