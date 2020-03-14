@@ -24,6 +24,7 @@ module.exports = {
     'no-unused-expressions': 0,
     'no-unused-vars': 0,
     'object-curly-newline': 0,
+    'jsx-a11y/accessible-emoji': 0,
     'jsx-a11y/label-has-associated-control': 0,
     'react/forbid-prop-types': 0,
   },

@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import Field from 'common/components/Field';
+import useTransaction from 'transactions/contexts/transactions';
+
+import InputField from 'common/components/InputField';
+import RadioField from 'common/components/RadioField';
 import Heading from 'common/components/Heading';
+import Text from 'common/components/Text';
 import Divider from 'common/components/Divider';
 import Button from 'common/components/Button';
 
@@ -15,10 +19,24 @@ const Container = styled.div`
   margin-top: ${(props) => props.theme.sizings.large};
 `;
 
+const HorizontalFields = styled.div`
+  display: flex;
+
+  ${RadioField}:first-child {
+    margin-right: ${(props) => props.theme.sizings.large};
+  }
+`;
+
+const Label = styled(Text)`
+  margin-top: ${(props) => props.theme.sizings.large};
+`;
+
 const TransactionForm = () => {
+  const { addTransaction } = useTransaction();
   const [values, setValues] = useState({
     text: '',
     amount: '',
+    type: '',
   });
 
   const handleChange = (e) => {
@@ -31,6 +49,11 @@ const TransactionForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    addTransaction(values);
+    setValues({
+      text: '',
+      amount: '',
+    });
   };
 
   return (
@@ -40,22 +63,39 @@ const TransactionForm = () => {
       </Heading>
       <HeadingDivider />
       <form onSubmit={handleSubmit}>
-        <Field
+        <InputField
           name="text"
           placeholder="Enter text"
           label="Text"
           value={values.text}
           onChange={handleChange}
         />
-        <Field
+        <Label>Type</Label>
+        <HorizontalFields>
+          <RadioField
+            name="type"
+            label="Income"
+            value="income"
+            onChange={handleChange}
+            checked={values.type === 'income'}
+          />
+          <RadioField
+            name="type"
+            label="Expense"
+            value="expense"
+            onChange={handleChange}
+            checked={values.type === 'expense'}
+          />
+        </HorizontalFields>
+        <InputField
           type="number"
           name="amount"
           placeholder="Enter amount"
-          label="Amount (- expense, + income)"
+          label="Amount"
           value={values.amount}
           onChange={handleChange}
         />
-        <Button color="success" isFullwidth>
+        <Button type="submit" color="primary" isFullwidth>
           Add transaction
         </Button>
       </form>

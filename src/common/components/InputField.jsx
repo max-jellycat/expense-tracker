@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Field = ({
+const InputField = ({
   className,
   type,
   name,
@@ -13,9 +13,10 @@ const Field = ({
 }) => {
   return (
     <div className={className}>
-      <Label>{label}</Label>
+      <Label htmlFor={name}>{label}</Label>
       <Input
         type={type}
+        id={name}
         name={name}
         placeholder={placeholder}
         label={label}
@@ -26,7 +27,7 @@ const Field = ({
   );
 };
 
-Field.propTypes = {
+InputField.propTypes = {
   className: PropTypes.string.isRequired,
   type: PropTypes.string,
   name: PropTypes.string.isRequired,
@@ -36,11 +37,11 @@ Field.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-Field.defaultProps = {
+InputField.defaultProps = {
   type: 'text',
 };
 
-const StyledField = styled(Field)`
+const StyledField = styled(InputField)`
   display: flex;
   flex-direction: column;
   margin: ${(props) => props.theme.sizings.medium} 0;

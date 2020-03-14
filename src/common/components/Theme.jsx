@@ -30,9 +30,10 @@ const theme = {
     sansSerif: 'Nunito',
   },
   fontSizes: {
-    small: '0.8rem',
+    mini: 'O.25rem',
+    small: '0.75rem',
     default: '1em',
-    large: '1.6em',
+    large: '1.5em',
     larger: '2em',
     largest: '3em',
   },

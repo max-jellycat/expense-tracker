@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import useTransaction from 'transactions/contexts/transactions';
+
 import Heading from 'common/components/Heading';
+import Text from 'common/components/Text';
 import Divider from 'common/components/Divider';
 import Transaction from 'transactions/components/Transaction';
 
@@ -14,15 +17,32 @@ const HeadingDivider = styled(Divider)`
   margin-bottom: ${(props) => props.theme.sizings.medium};
 `;
 
-const TransactionsList = () => (
-  <StyledTransactionsList>
-    <Heading size="default" isUppercase isBold>
-      History
-    </Heading>
-    <HeadingDivider />
-    <Transaction type="income" amount={400} text="Salary" />
-    <Transaction type="expense" amount={-200} text="Withdraw" />
-  </StyledTransactionsList>
-);
+const Emoji = styled.span`
+  margin-left: ${(props) => props.theme.sizings.small};
+`;
+
+const TransactionsList = () => {
+  const { transactions } = useTransaction();
+  return (
+    <StyledTransactionsList>
+      <Heading size="default" isUppercase isBold>
+        History
+      </Heading>
+      <HeadingDivider />
+      {transactions.length ? (
+        transactions.map((t) => (
+          <Transaction amount={t.amount} text={t.text} type={t.type} />
+        ))
+      ) : (
+        <Text>
+          <span>No transactions yet.</span>
+          <Emoji aria-label="sad" role="img">
+            😔
+          </Emoji>
+        </Text>
+      )}
+    </StyledTransactionsList>
+  );
+};
 
 export default TransactionsList;

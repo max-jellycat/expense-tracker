@@ -19,6 +19,7 @@ const StyledButton = styled(Button)`
   padding: 0.75rem 1.25rem;
   border-radius: ${(props) => props.theme.radius.large};
   font-size: ${(props) => props.theme.fontSizes.default};
+  font-family: ${(props) => props.theme.fonts.sansSerif};
   border: 0;
   width: ${(props) => props.isFullwidth && '100%'};
   transition: all 0.3s;

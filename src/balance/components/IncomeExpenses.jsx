@@ -36,13 +36,13 @@ const IncomeExpenses = () => (
     <IncomeExpense>
       <IncomeExpenseLabel isUppercase>Income</IncomeExpenseLabel>
       <Text color="success" size="large" isBold>
-        +400 €
+        400 €
       </Text>
     </IncomeExpense>
     <IncomeExpense>
       <IncomeExpenseLabel isUppercase>Expenses</IncomeExpenseLabel>
       <Text color="danger" size="large" isBold>
-        -200 €
+        200 €
       </Text>
     </IncomeExpense>
   </StyledCard>
