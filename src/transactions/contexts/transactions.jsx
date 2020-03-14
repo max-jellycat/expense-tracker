@@ -7,21 +7,25 @@ const TransactionsContext = createContext();
 export const TransactionsProvider = ({ children }) => {
   const [transactions, setTransactions] = useState([]);
 
-  const addTransaction = useCallback((values) => {
-    const { text, amount, type } = values;
-    setTransactions([
-      ...transactions,
-      {
-        id: uuid(),
-        text,
-        amount,
-        type,
-      },
-    ]);
-  });
+  const addTransaction = useCallback(
+    (values) => {
+      const { text, amount, type } = values;
+      setTransactions([
+        ...transactions,
+        {
+          id: uuid(),
+          text,
+          amount: parseFloat(amount),
+          type,
+        },
+      ]);
+    },
+    [transactions],
+  );
 
-  const deleteTransaction = useCallback((id) =>
-    setTransactions(transactions.filter((t) => t.id !== id)),
+  const deleteTransaction = useCallback(
+    (id) => setTransactions(transactions.filter((t) => t.id !== id)),
+    [transactions],
   );
 
   return (

@@ -31,7 +31,12 @@ const TransactionsList = () => {
       <HeadingDivider />
       {transactions.length ? (
         transactions.map((t) => (
-          <Transaction amount={t.amount} text={t.text} type={t.type} />
+          <Transaction
+            key={t.id}
+            amount={t.amount}
+            text={t.text}
+            type={t.type}
+          />
         ))
       ) : (
         <Text>
